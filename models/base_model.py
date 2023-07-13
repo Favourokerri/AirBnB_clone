@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """Base model for airbnb """
 
-from models import storage
 import uuid
 from datetime import datetime
 
