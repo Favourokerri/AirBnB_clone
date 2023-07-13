@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """Base model for airbnb """
 
+from models import storage
 import uuid
 from datetime import datetime
-from models import storage
 
 
 class BaseModel:
@@ -53,7 +53,6 @@ class BaseModel:
             updated_at to the with the current date and time
         """
         self.updated_at = datetime.now()
-        storage.save()
 
     def to_dict(self):
         """
