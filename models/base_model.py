@@ -34,8 +34,8 @@ class BaseModel:
                     self.__dict__[key] = value
         else:
             self.id = str(uuid.uuid4())
-            self.created_at = datetime.today()
-            self.updated_at = datetime.today()
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
             storage.new(self)
 
     def __str__(self):
@@ -43,7 +43,7 @@ class BaseModel:
             string that returns information about
             a classs
         """
-        return "[{}] ({}) {}".\
+        return "[{:s}] ({:s}) {}".\
             format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
@@ -51,7 +51,7 @@ class BaseModel:
             public instance method that updates the
             updated_at to the with the current date and time
         """
-        self.updated_at = datetime.today()
+        self.updated_at = datetime.now()
         storage.save()
 
     def to_dict(self):
