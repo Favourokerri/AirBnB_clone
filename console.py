@@ -14,11 +14,6 @@ class HBNBCommand(cmd.Cmd):
     """command interpreter """
     prompt = "(hbnb) "
 
-    def default(self, line):
-        """Catch commands if nothing else matches then."""
-        # print("DEF:::", line)
-        self._precmd(line)
-
     def do_create(self, line):
         """
             Creates a new instance of BaseModel,
@@ -55,7 +50,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** class doesn't exist **")
 
-    def do_destory(self, line):
+    def do_destroy(self, line):
         """
             Deletes an instance based on the class name and id
             Ex: $ destroy BaseModel 1234-1234-1234.
