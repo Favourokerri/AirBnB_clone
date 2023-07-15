@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """storage class"""
+
 import json
 import os
 import datetime
