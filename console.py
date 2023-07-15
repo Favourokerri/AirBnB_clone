@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+""" command line interpreter """
+
 import cmd
 from models.base_model import BaseModel
 from models import storage
