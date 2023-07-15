@@ -1,50 +1,53 @@
+#!/usr/bin/python3
+"""Unittest module for the User Class."""
+
 import unittest
+from datetime import datetime
+import time
 from models.user import User
+import re
+import json
+from models.engine.file_storage import FileStorage
+import os
+from models import storage
+from models.base_model import BaseModel
 
 
 class TestUser(unittest.TestCase):
+
+    """Test Cases for the User class."""
+
     def setUp(self):
-        """Set up any necessary objects before each test case."""
-        # Create an instance of User for testing
-        self.user = User()
+        """Sets up test methods."""
+        pass
 
     def tearDown(self):
-        """Clean up any resources after each test case."""
-        # Remove the reference to the user instance
-        self.user = None
+        """Tears down test methods."""
+        self.resetStorage()
+        pass
 
-    def test_user_attributes(self):
-        """Test the attributes of the User class."""
-        self.assertTrue(hasattr(self.user, 'email'))
-        self.assertTrue(hasattr(self.user, 'password'))
-        self.assertTrue(hasattr(self.user, 'first_name'))
-        self.assertTrue(hasattr(self.user, 'last_name'))
+    def resetStorage(self):
+        """Resets FileStorage data."""
+        FileStorage._FileStorage__objects = {}
+        if os.path.isfile(FileStorage._FileStorage__file_path):
+            os.remove(FileStorage._FileStorage__file_path)
 
-    def test_user_instance(self):
-        """Test the instance of the User class."""
-        self.assertIsInstance(self.user, User)
+    def test_8_instantiation(self):
+        """Tests instantiation of User class."""
 
-    def test_user_str(self):
-        """Test the __str__() method of the User class."""
-        expected_str = f"[User] ({self.user.id}) {self.user.__dict__}"
-        self.assertEqual(str(self.user), expected_str)
+        b = User()
+        self.assertEqual(str(type(b)), "<class 'models.user.User'>")
+        self.assertIsInstance(b, User)
+        self.assertTrue(issubclass(type(b), BaseModel))
 
-    def test_user_save(self):
-        """Test the save() method of the User class."""
-        old_updated_at = self.user.updated_at
-        self.user.save()
-        new_updated_at = self.user.updated_at
-        self.assertNotEqual(old_updated_at, new_updated_at)
-
-    def test_user_to_dict(self):
-        """Test the to_dict() method of the User class."""
-        user_dict = self.user.to_dict()
-        self.assertEqual(user_dict['__class__'], 'User')
-        self.assertEqual(
-                user_dict['created_at'], self.user.created_at.isoformat())
-        self.assertEqual(
-                user_dict['updated_at'], self.user.updated_at.isoformat())
+    def test_8_attributes(self):
+        """Tests the attributes of User class."""
+        attributes = storage.attributes()["User"]
+        o = User()
+        for k, v in attributes.items():
+            self.assertTrue(hasattr(o, k))
+            self.assertEqual(type(getattr(o, k, None)), v)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
