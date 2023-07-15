@@ -10,7 +10,7 @@ Repo Contents
 Installation
 Usage
 Built with
-author
+Acknowledgements
 Description 📄
 This is the first phase of a four phase project, to create a basic clone of the AirBnB web app. In this first phase a basic console was created using the Cmd Python module, to manage the objects of the whole project, being able to implement the methods create, show, update, all, and destroy to the existing classes and subclasses.
 
@@ -107,6 +107,8 @@ python3 (3.4.3)
 Version 📌
 HBnB - version 9.6
 
+Acknowledgements 🙌
+To all the peers that contribuited with their knowledge
+
 Authors 🖋️
-Favour okerri - @favourokerri
-Rachel uneke  - @racheluneke 
+ 
