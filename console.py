@@ -146,6 +146,15 @@ class HBNBCommand(cmd.Cmd):
             new_list = [str(obj) for key, obj in storage.all().items()]
             print(new_list)
 
+    def do_count(self, line):
+        """Count current number of class instances"""
+        count = 0
+        for key, value in storage._FileStorage__objects.items():
+            words = key.split(".")
+            if line == words[0]:
+                count += 1
+        print(count)
+
     def do_quit(self, line):
         """commnad for quit"""
         return True
