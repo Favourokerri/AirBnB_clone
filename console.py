@@ -16,14 +16,14 @@ class HBNBCommand(cmd.Cmd):
 
     def precmd(self, line):
         """Intercepts commands to test for class.syntax()"""
-        # print("PRECMD:::", line)
         match = re.search(r"^(\w*)\.(\w+)(?:\(([^)]*)\))$", line)
         if not match:
             return cmd.Cmd.precmd(self, line)
         classname = match.group(1)
         method = match.group(2)
-        line = f"all {classname}"
-        return cmd.Cmd.precmd(self, line)
+        if classname in storage.classes():
+            line = f"{method} {classname}"
+            return cmd.Cmd.precmd(self, line)
 
     def do_create(self, line):
         """
