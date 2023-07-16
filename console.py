@@ -31,8 +31,9 @@ class HBNBCommand(cmd.Cmd):
             if key in storage.all():
                 line = "{} {} {}".format(method, classname, _id)
                 return cmd.Cmd.precmd(self, line)
-
-            print("hola")
+            elif key not in storage.all():
+                line = "{} {} {}".format(method, classname, _id)
+                return cmd.Cmd.precmd(self, line)
 
     def do_create(self, line):
         """
