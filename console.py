@@ -21,9 +21,18 @@ class HBNBCommand(cmd.Cmd):
             return cmd.Cmd.precmd(self, line)
         classname = match.group(1)
         method = match.group(2)
-        if classname in storage.classes():
-            line = f"{method} {classname}"
-            return cmd.Cmd.precmd(self, line)
+        _id = match.group(3)
+        if not _id:
+            if classname in storage.classes():
+                line = f"{method} {classname}"
+                return cmd.Cmd.precmd(self, line)
+        else:
+            key = "{}.{}".format(classname, _id)
+            if key in storage.all():
+                line = "{} {} {}".format(method, classname, _id)
+                return cmd.Cmd.precmd(self, line)
+
+            print("hola")
 
     def do_create(self, line):
         """
