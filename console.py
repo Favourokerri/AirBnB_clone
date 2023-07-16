@@ -48,13 +48,15 @@ class HBNBCommand(cmd.Cmd):
             method = match2.group(2)
             _id = match2.group(3)[1:-1]
             attribute_name = match2.group(4)[1:-1]
-            attribute_value = match2.group(5)[1:-1]
+            att_val = match2.group(5)
+            if att_val.startswith(("'", '"')) and att_val.endswith(("'", '"')):
+                att_val = att_val[1:-1]
             key = "{}.{}".format(classname, _id)
             if key in storage.all():
                 line = "{} {} {} {} {}".format(
                         method, classname,
                         _id, attribute_name,
-                        attribute_value)
+                        att_val)
                 return cmd.Cmd.precmd(self, line)
         else:
             return cmd.Cmd.precmd(self, line)
