@@ -17,10 +17,17 @@ class HBNBCommand(cmd.Cmd):
     def precmd(self, line):
         """Intercepts commands to test for class.syntax()"""
         match = re.search(r"^(\w*)\.(\w+)(?:\(([^)]*)\))$", line)
-        match2 = re.search(r"^(\w*)\.(\w+)\(([^)]*),\s*([^)]*),\s*([^)]*)\)$", line)
-        if not match or match2:
-            return cmd.Cmd.precmd(self, line)
-        elif match:
+        regx_match2 = r"^(\w+)\.(\w+)\(([^,]+),\s*([^,]+),\s*([^)]+)\)$"
+        match2 = re.search(f"{regx_match2}", line)
+        words = line.split(" ")
+        number_of_arguements = len(words)
+        """
+            since both class_name.all() and
+            <class name>.update(<id>, <dictionary representation>)
+            will both match the two regex we use number of args
+            to differentiate them
+        """
+        if match and number_of_arguements < 3:
             classname = match.group(1)
             method = match.group(2)
             _id = match.group(3)
@@ -36,6 +43,21 @@ class HBNBCommand(cmd.Cmd):
                 elif key not in storage.all():
                     line = "{} {} {}".format(method, classname, _id)
                     return cmd.Cmd.precmd(self, line)
+        elif match2 and number_of_arguements > 2:
+            classname = match2.group(1)
+            method = match2.group(2)
+            _id = match2.group(3)
+            attribute_name = match2.group(4)
+            attribute_value = match2.group(5)
+            key = "{}.{}".format(classname, _id)
+            if key in storage.all():
+                line = "{} {} {} {} {}".format(
+                        method, classname,
+                        _id, attribute_name,
+                        attribute_value)
+                return cmd.Cmd.precmd(self, line)
+        else:
+            return cmd.Cmd.precmd(self, line)
 
     def do_create(self, line):
         """
