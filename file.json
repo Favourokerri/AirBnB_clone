@@ -1,1 +1,1 @@
-{"User.82192ea3-9934-4530-94eb-02aa8a33e160": {"id": "82192ea3-9934-4530-94eb-02aa8a33e160", "created_at": "2023-07-16T12:26:16.967653", "updated_at": "2023-07-16T12:32:43.822066", "first_name": "John", "__class__": "User", "sex": "male"}}
+{"User.82192ea3-9934-4530-94eb-02aa8a33e160": {"id": "82192ea3-9934-4530-94eb-02aa8a33e160", "created_at": "2023-07-16T12:26:16.967653", "updated_at": "2023-07-16T12:39:02.997664", "first_name": "John", "__class__": "User", "sex": "male", "name": "micheal"}}

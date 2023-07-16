@@ -30,7 +30,7 @@ class HBNBCommand(cmd.Cmd):
         if match and number_of_arguements < 3:
             classname = match.group(1)
             method = match.group(2)
-            _id = match.group(3)
+            _id = match.group(3)[1:-1]
             if not _id:
                 if classname in storage.classes():
                     line = f"{method} {classname}"
