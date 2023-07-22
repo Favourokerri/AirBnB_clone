@@ -20,6 +20,6 @@ button{
 	margin-right: 30px;
 }
 
-button :hover{
-    opacity: 0%;
+button:hover{
+    opacity: 90%;
 }
